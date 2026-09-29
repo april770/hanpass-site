@@ -430,21 +430,20 @@
     }
     const keys = ['website','name','phone','email','job','years','fields','experience','link','english','attend','source','referrer','consent'];
     const data = Object.fromEntries(keys.map(k => [k, valueOf(k)]));
-       btn.disabled = true; btn.textContent = '보내는 중…'; statusEl.textContent = '신청서를 보내고 있어요. 10초 정도 걸릴 수 있으니 창을 닫지 말아 주세요.';
+    btn.disabled = true; btn.textContent = '보내는 중…'; statusEl.textContent = '신청서를 보내고 있어요. 10초 정도 걸릴 수 있으니 창을 닫지 말아 주세요.';
     try{
-      const res = await fetch(CONFIG.SCRIPT_URL, {
+      await fetch(CONFIG.SCRIPT_URL, {
         method: 'POST',
-        headers: {'Content-Type': 'text/plain;charset=utf-8'},  // preflight 없이 Apps Script로 전송
+        mode: 'no-cors',  // 구글 응답을 읽지 않고 전송만 함 (응답 읽기 실패로 오류가 뜨는 문제 방지)
+        headers: {'Content-Type': 'text/plain;charset=utf-8'},
         body: JSON.stringify(data),
       });
-      const out = await res.json();
-      if (!out.ok) throw new Error(out.error || 'fail');
       form.style.display = 'none';
       const done = document.getElementById('done');
       done.style.display = 'block';
       done.focus();
     }catch(err){
-      statusEl.textContent = '신청서를 보내지 못했어요. 잠시 후 다시 시도하거나 ' + CONFIG.CONTACT + '로 연락해 주세요.';
+      statusEl.textContent = '전송 결과를 확인하지 못했어요. 이미 접수됐을 수 있으니 다시 보내기 전에 ' + CONFIG.CONTACT + '로 문의해 주세요.';
       statusEl.classList.add('error');
       btn.disabled = false; btn.textContent = '리더 신청하기';
     }
