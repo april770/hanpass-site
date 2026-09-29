@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>한패스 아카데미 리더 모집</title>
+<meta name="description" content="한국 거주 외국인 팀의 실전 직무 프로젝트를 이끌 한패스 아카데미 리더를 찾습니다. HanWork × Soo & Carrots">
+<meta property="og:title" content="한패스 아카데미 리더 모집">
+<meta property="og:description" content="외국인 인재와 한국 회사 사이의 간격, 함께 건너 줄 실무자를 찾습니다.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  :root{
+    --ink:#1B1F3B;        /* 본문·제목 */
+    --paper:#F5F6F8;      /* 배경 */
+    --signal:#F2C230;     /* 간격(gap)을 표시하는 유일한 강조색 */
+    --slate:#5B6275;      /* 보조 텍스트 */
+    --line:#D9DCE3;       /* 구분선 */
+    --white:#FFFFFF;
+    --error:#B3261E;
+    --measure:40rem;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    font-size:1.0625rem;line-height:1.7;word-break:keep-all;
+  }
+  :focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+  .wrap{max-width:var(--measure);margin:0 auto;padding:0 1.25rem}
+
+  /* Hero */
+  .hero{padding:3.5rem 0 3rem;border-bottom:1px solid var(--line)}
+  .brand{font-size:.875rem;color:var(--slate);margin:0 0 2.5rem}
+  .brand strong{display:block;font-size:1rem;color:var(--ink);margin-bottom:.15rem}
+  .gap-mark{
+    display:flex;align-items:center;gap:.4em;margin:0 0 2rem;
+    font-weight:900;letter-spacing:-.04em;line-height:1;
+    font-size:clamp(2.6rem,11vw,5.25rem);
+  }
+  .gap-mark .bridge{
+    flex:1;min-width:6em;height:1.9em;background:var(--signal);
+    display:flex;align-items:center;justify-content:center;
+    font-size:.32em;letter-spacing:.02em;font-weight:800;
+  }
+  h1{font-size:clamp(1.5rem,4.4vw,2rem);line-height:1.4;margin:0 0 1rem;font-weight:800;letter-spacing:-.02em}
+  .lead{color:var(--slate);margin:0 0 2rem}
+  .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:0 0 2rem}
+  .facts div{background:var(--white);padding:.9rem 1rem}
+  .facts dt{font-size:.8125rem;color:var(--slate)}
+  .facts dd{margin:0;font-weight:700}
+  @media (max-width:520px){.facts{grid-template-columns:1fr}}
+  .btn{
+    display:inline-block;background:var(--ink);color:var(--white);text-decoration:none;
+    font:inherit;font-weight:700;padding:.9rem 1.6rem;border:0;cursor:pointer;
+  }
+  .btn:hover{background:#2C3160}
+  .btn[disabled]{opacity:.5;cursor:wait}
+
+  /* Sections */
+  section{padding:2.75rem 0;border-bottom:1px solid var(--line)}
+  h2{font-size:1.375rem;margin:0 0 1.1rem;letter-spacing:-.01em}
+  p{margin:0 0 1rem}
+  h3{font-size:1.0625rem;margin:2rem 0 .75rem}
+  .areas{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+  .areas li{background:var(--white);margin:0;padding:.75rem 1rem;font-weight:700;line-height:1.45}
+  .areas .en{display:block;font-weight:400;font-size:.8125rem;color:var(--slate)}
+  @media (max-width:520px){.areas{grid-template-columns:1fr}}
+  ul{margin:0;padding-left:1.2rem}
+  li{margin:.3rem 0}
+  .note{font-size:.9375rem;color:var(--slate)}
+
+  table{width:100%;border-collapse:collapse;font-size:.9375rem;background:var(--white)}
+  th,td{text-align:left;vertical-align:top;padding:.65rem .8rem;border-bottom:1px solid var(--line)}
+  th{font-weight:700;white-space:nowrap}
+  tr:last-child td{border-bottom:0}
+  td.date{white-space:nowrap;font-variant-numeric:tabular-nums}
+  td.date + td{white-space:nowrap}
+  tr.prep td{color:var(--slate)}
+  .table-scroll{overflow-x:auto;border:1px solid var(--line)}
+
+  ol.steps{list-style:none;padding:0;margin:0;counter-reset:s}
+  ol.steps li{counter-increment:s;position:relative;padding:0 0 1rem 2.6rem;margin:0}
+  ol.steps li:last-child{padding-bottom:0}
+  ol.steps li::before{
+    content:counter(s);position:absolute;left:0;top:.1rem;width:1.8rem;height:1.8rem;
+    border:2px solid var(--ink);border-radius:50%;display:grid;place-items:center;
+    font-weight:800;font-size:.875rem;
+  }
+  ol.steps strong{display:block}
+
+  .promise{background:var(--white);border-left:6px solid var(--signal);padding:1rem 1.25rem;margin-top:1.25rem}
+  .promise p:last-child{margin:0}
+
+  /* Form */
+  #apply{border-bottom:0}
+  form{background:var(--white);border:1px solid var(--line);padding:1.5rem 1.25rem}
+  @media (min-width:600px){form{padding:2rem}}
+  .field{margin:0 0 1.35rem}
+  .field > label, .field > .q{display:block;font-weight:700;margin-bottom:.35rem}
+  .req{color:var(--error);margin-left:.15em}
+  .hint{display:block;font-size:.875rem;color:var(--slate);font-weight:400;margin-top:.1rem}
+  input[type=text],input[type=email],input[type=tel],input[type=url],select,textarea{
+    width:100%;font:inherit;font-size:1rem;padding:.7rem .8rem;border:1px solid #B9BEC9;background:var(--white);color:var(--ink);border-radius:0;
+  }
+  textarea{min-height:8rem;resize:vertical}
+  .row2{display:grid;gap:0 1rem}
+  @media (min-width:600px){.row2{grid-template-columns:1fr 1fr}}
+  .choices{display:grid;gap:.45rem}
+  .choices label{display:flex;gap:.6rem;align-items:flex-start;font-weight:400;cursor:pointer}
+  .choices .en{display:block;color:var(--slate);font-size:.8125rem;line-height:1.4}
+  .choices input{margin-top:.35rem;width:1.05rem;height:1.05rem;accent-color:var(--ink);flex:none}
+  .invalid input[type=text],.invalid input[type=email],.invalid input[type=tel],.invalid textarea,.invalid select{border-color:var(--error)}
+  .err{display:none;color:var(--error);font-size:.875rem;margin-top:.3rem}
+  .invalid .err{display:block}
+  details{border:1px solid var(--line);padding:.8rem 1rem;margin:0 0 .8rem;font-size:.9375rem}
+  summary{cursor:pointer;font-weight:700}
+  details table{margin-top:.6rem;font-size:.875rem}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .form-status{margin-top:1rem;font-weight:700}
+  .form-status.error{color:var(--error)}
+
+  .done{display:none;background:var(--white);border:1px solid var(--line);border-top:6px solid var(--signal);padding:2rem 1.5rem}
+  .done h2{margin-bottom:.75rem}
+
+  footer{padding:2.5rem 0 3.5rem;font-size:.875rem;color:var(--slate)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="brand"><strong>한패스 아카데미 리더 모집</strong>HanWork(한패스) × Soo &amp; Carrots</p>
+    <div class="gap-mark" aria-label="PASS THE GAP">
+      <span>PASS</span><span class="bridge" aria-hidden="true">THE</span><span>GAP</span>
+    </div>
+    <h1>외국인 인재와 한국 회사 사이의 간격,<br>함께 건너 줄 리더를 찾습니다.</h1>
+    <p class="lead">한국에서 일하고 싶은 외국인 참여자 5명과 한 팀이 되어, 3개월 동안 실제 직무 프로젝트를 이끌어 주실 한패스 아카데미 리더를 모집합니다.</p>
+    <dl class="facts">
+      <div><dt>활동 기간</dt><dd>2026년 10월 ~ 12월</dd></div>
+      <div><dt>장소</dt><dd>서울 한패스 B2 공간</dd></div>
+      <div><dt>모집 인원</dt><dd>리더 10명</dd></div>
+    </dl>
+    <a class="btn" href="#apply">리더 신청하기</a>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <h2>리더가 하는 일</h2>
+      <p>한국어 일상 대화가 가능한 외국인 50명이 10개 팀으로 나뉘어 활동합니다. 리더는 팀의 PM으로서 팀원 5명과 함께 아래 역할을 맡습니다.</p>
+      <ul>
+        <li>한패스가 제공하는 실무 과제를 팀원들과 함께 결과물로 완성</li>
+        <li>문제 정의, 역할 배분, 일정 관리 등 팀 프로젝트 진행</li>
+        <li>팀원들이 맡은 역할을 잘 해낼 수 있도록 실무 피드백과 서포트</li>
+        <li>프로젝트가 끝날 때까지 책임지고 팀과 과제를 이끌기</li>
+        <li><strong>오프라인 모임 6회와 연말 행사 필참</strong></li>
+      </ul>
+      <p class="note" style="margin:.75rem 0 0">과제 자료와 현장 운영은 운영팀이 준비합니다.</p>
+
+      <h3>프로젝트 분야</h3>
+      <ul class="areas">
+        <li>마케팅·커뮤니케이션<span class="en">Marketing &amp; Communications</span></li>
+        <li>상품·서비스 기획<span class="en">Product &amp; Service Planning</span></li>
+        <li>UX 리서치·프로덕트 디자인<span class="en">UX Research &amp; Product Design</span></li>
+        <li>데이터·비즈니스 분석<span class="en">Data &amp; Business Analysis</span></li>
+        <li>글로벌 비즈니스·그로스<span class="en">Global Business &amp; Growth</span></li>
+        <li>HR·조직문화<span class="en">HR &amp; Organizational Culture</span></li>
+      </ul>
+      <p class="note" style="margin:.75rem 0 0">분야별 팀 수는 참여자 신청 현황에 따라 정해집니다.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>일정</h2>
+      <p>6번의 밋업과 연말 행사에 모두 오프라인으로 참여해 주셔야 합니다.</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>일정</th><th>회차</th><th>내용</th></tr></thead>
+          <tbody>
+            <tr><td class="date">10/17 (토)</td><td>1차 밋업</td><td>Challenge Build Day, 팀 배정</td></tr>
+            <tr><td class="date">팀별 선택</td><td>2~6차 밋업</td><td>팀원들과 논의해 일정 선택</td></tr>
+            <tr><td class="date">12/18 (금)</td><td>연말 행사</td><td>Year-end Showcase Night 오프라인 참석</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note" style="margin:.75rem 0 0;font-size:.8125rem">(일정은 변동될 수 있음)</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>이런 분을 찾아요</h2>
+      <ul>
+        <li>위 분야 중 하나 이상에서 실무 경험이 있는 분</li>
+        <li>팀이나 프로젝트를 이끌어 본 경험, 또는 멘토링·스터디 운영 경험이 있는 분</li>
+        <li>한국어가 서툰 팀원과도 차분하게 소통할 수 있는 분</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>리더에게 드리는 것</h2>
+      <ul>
+        <li>리더 활동비 <span class="note">(금액은 신청서 작성 시 개별 안내)</span></li>
+        <li>연말 행사에서 리더 소개, 한패스·참여 기업과의 네트워킹</li>
+      </ul>
+      <div class="promise">
+        <p><strong>팀원들이 리더를 기준으로 움직이기 때문에 중도 이탈은 원칙적으로 어렵습니다.</strong> 불가피한 경우 대체 리더에게 인수인계를 마쳐야 하며, 활동비는 진행한 회차까지 지급됩니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>선발 절차</h2>
+      <ol class="steps">
+        <li><strong>신청서 작성</strong>아래 폼으로 5분이면 됩니다.</li>
+        <li><strong>서류 검토</strong>운영팀이 경험과 일정을 확인합니다.</li>
+        <li><strong>선발 안내와 계약</strong>선발된 분께 개별 연락드리고 계약을 진행합니다.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="apply">
+    <div class="wrap">
+      <h2>리더 신청하기</h2>
+
+      <form id="leaderForm" novalidate>
+        <div class="hp" aria-hidden="true">
+          <label>웹사이트<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+        </div>
+
+        <div class="row2">
+          <div class="field" data-req>
+            <label for="f_name">이름<span class="req">*</span></label>
+            <input id="f_name" name="name" type="text" autocomplete="name">
+            <span class="err">이름을 입력해 주세요.</span>
+          </div>
+          <div class="field" data-req>
+            <label for="f_phone">휴대전화 번호<span class="req">*</span></label>
+            <input id="f_phone" name="phone" type="tel" autocomplete="tel" placeholder="010-0000-0000">
+            <span class="err">연락 가능한 번호를 입력해 주세요.</span>
+          </div>
+        </div>
+        <div class="field" data-req data-type="email">
+          <label for="f_email">이메일<span class="req">*</span></label>
+          <input id="f_email" name="email" type="email" autocomplete="email">
+          <span class="err">이메일을 확인해 주세요.</span>
+        </div>
+        <div class="row2">
+          <div class="field" data-req>
+            <label for="f_job">현재 회사와 직무<span class="req">*</span></label>
+            <input id="f_job" name="job" type="text" placeholder="예) ○○커머스 마케터">
+            <span class="err">회사와 직무를 입력해 주세요.</span>
+          </div>
+          <div class="field" data-req>
+            <label for="f_years">실무 경력<span class="req">*</span></label>
+            <select id="f_years" name="years">
+              <option value="">선택해 주세요</option>
+              <option>3년 미만</option>
+              <option>3~5년</option>
+              <option>5~10년</option>
+              <option>10년 이상</option>
+            </select>
+            <span class="err">경력을 선택해 주세요.</span>
+          </div>
+        </div>
+
+        <div class="field" data-req data-group="fields">
+          <span class="q">리드할 수 있는 분야<span class="req">*</span><span class="hint">가능한 분야를 모두 골라 주세요.</span></span>
+          <div class="choices">
+            <label><input type="checkbox" name="fields" value="마케팅·커뮤니케이션"><span>마케팅·커뮤니케이션 <span class="en">Marketing &amp; Communications</span></span></label>
+            <label><input type="checkbox" name="fields" value="상품·서비스 기획"><span>상품·서비스 기획 <span class="en">Product &amp; Service Planning</span></span></label>
+            <label><input type="checkbox" name="fields" value="UX 리서치·프로덕트 디자인"><span>UX 리서치·프로덕트 디자인 <span class="en">UX Research &amp; Product Design</span></span></label>
+            <label><input type="checkbox" name="fields" value="데이터·비즈니스 분석"><span>데이터·비즈니스 분석 <span class="en">Data &amp; Business Analysis</span></span></label>
+            <label><input type="checkbox" name="fields" value="글로벌 비즈니스·그로스"><span>글로벌 비즈니스·그로스 <span class="en">Global Business &amp; Growth</span></span></label>
+            <label><input type="checkbox" name="fields" value="HR·조직문화"><span>HR·조직문화 <span class="en">HR &amp; Organizational Culture</span></span></label>
+          </div>
+          <span class="err">하나 이상 선택해 주세요.</span>
+        </div>
+
+        <div class="field" data-req>
+          <label for="f_exp">실무 경험과 팀을 이끈 경험을 간단히 소개해 주세요<span class="req">*</span><span class="hint">대표 프로젝트 하나와 내 역할이면 충분해요. 멘토링·스터디 운영 경험도 좋아요.</span></label>
+          <textarea id="f_exp" name="experience"></textarea>
+          <span class="err">경험을 적어 주세요.</span>
+        </div>
+
+        <div class="field">
+          <label for="f_link">LinkedIn 또는 포트폴리오 링크</label>
+          <input id="f_link" name="link" type="url" placeholder="https://">
+        </div>
+
+        <div class="field" data-req data-group="english">
+          <span class="q">영어로 소통할 수 있나요?<span class="req">*</span><span class="hint">필수 조건은 아니에요. 팀 활동은 주로 한국어로 진행합니다.</span></span>
+          <div class="choices">
+            <label><input type="radio" name="english" value="업무 가능">업무 대화까지 가능해요</label>
+            <label><input type="radio" name="english" value="간단한 소통">간단한 소통은 가능해요</label>
+            <label><input type="radio" name="english" value="어려움">어려워요</label>
+          </div>
+          <span class="err">하나를 선택해 주세요.</span>
+        </div>
+
+        <div class="field" data-req data-group="attend">
+          <span class="q">6번의 밋업과 연말 행사(12/18)에 모두 오프라인으로 참여할 수 있나요?<span class="req">*</span></span>
+          <div class="choices">
+            <label><input type="radio" name="attend" value="모두 가능">네, 모두 참여할 수 있어요</label>
+            <label><input type="radio" name="attend" value="일부 조율 필요">날짜에 따라 일부 조율이 필요해요</label>
+          </div>
+          <span class="err">하나를 선택해 주세요.</span>
+        </div>
+
+        <div class="row2">
+          <div class="field" data-req>
+            <label for="f_source">어떻게 알게 되었나요?<span class="req">*</span></label>
+            <select id="f_source" name="source">
+              <option value="">선택해 주세요</option>
+              <option>수앤캐롯츠 연락</option>
+              <option>지인 추천</option>
+              <option>한패스 추천</option>
+              <option>LinkedIn</option>
+              <option>직무 커뮤니티</option>
+              <option>기타</option>
+            </select>
+            <span class="err">하나를 선택해 주세요.</span>
+          </div>
+          <div class="field">
+            <label for="f_ref">추천인</label>
+            <input id="f_ref" name="referrer" type="text">
+          </div>
+        </div>
+
+        <details>
+          <summary>개인정보 수집·이용 안내</summary>
+          <table>
+            <tr><th>수집 주체</th><td>수앤캐롯츠 (한패스 아카데미 운영사)</td></tr>
+            <tr><th>목적</th><td>한패스 아카데미 리더 선발 심사, 선발 안내, 계약 연락</td></tr>
+            <tr><th>항목</th><td>이름, 휴대전화 번호, 이메일, 회사·직무, 경력, 리드 가능 분야, 경험, 링크, 영어 소통, 참여 가능 여부, 신청 경로, 추천인</td></tr>
+            <tr><th>보유 기간</th><td>선발되지 않은 경우 선발 종료 후 30일 이내 파기. 선발된 경우 계약 관계 종료 후 관련 법령에 따른 기간까지 보관</td></tr>
+            <tr><th>국외 보관</th><td>신청 내용은 Google LLC의 서버(미국 등)에 저장됩니다.</td></tr>
+            <tr><th>거부 권리</th><td>동의를 거부할 수 있으나, 거부 시 신청이 불가합니다.</td></tr>
+          </table>
+        </details>
+        <div class="field" data-req data-group="consent">
+          <div class="choices">
+            <label><input type="checkbox" name="consent" value="동의">[필수] 개인정보 수집·이용에 동의합니다.</label>
+          </div>
+          <span class="err">동의해야 신청할 수 있어요.</span>
+        </div>
+
+        <button class="btn" type="submit" id="submitBtn">리더 신청하기</button>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
+
+      <div class="done" id="done" tabindex="-1">
+        <h2>신청이 접수됐어요</h2>
+        <p>신청해 주셔서 감사합니다. 운영팀이 신청서를 검토한 뒤 적어 주신 연락처로 결과를 안내드릴게요.</p>
+        <p class="note" style="margin:0">문의: <span class="contact"></span></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p style="margin:0">한패스 아카데미<br>주최 HanWork(한패스) / 운영 수앤캐롯츠<br>문의 <span class="contact"></span></p>
+  </div>
+</footer>
+
+<script>
+  /* ===== 배포 전 설정 ===== */
+  const CONFIG = {
+    SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbw6vA4r8lf4KEi3djlH2DyRQH5ImMW2mdh8XuLXvoP5OJB3yvv_jOhg0PoI_26__7L4/exec',  // Apps Script 웹앱 URL (…/exec)
+    CONTACT: 'april@sooandcarrots.com',                            // 페이지에 표시할 문의처
+  };
+
+  document.querySelectorAll('.contact').forEach(el => el.textContent = CONFIG.CONTACT);
+
+  const form = document.getElementById('leaderForm');
+  const statusEl = document.getElementById('formStatus');
+  const btn = document.getElementById('submitBtn');
+
+  function valueOf(name){
+    const els = form.querySelectorAll(`[name="${name}"]`);
+    if (!els.length) return '';
+    if (els[0].type === 'checkbox' || els[0].type === 'radio'){
+      return Array.from(els).filter(e => e.checked).map(e => e.value).join(', ');
+    }
+    return els[0].value.trim();
+  }
+
+  function validate(){
+    let firstBad = null;
+    form.querySelectorAll('.field[data-req]').forEach(f => {
+      let ok;
+      if (f.dataset.group){
+        ok = !!f.querySelector('input:checked');
+      } else {
+        const v = f.querySelector('input, textarea, select').value.trim();
+        ok = v.length > 0;
+        if (ok && f.dataset.type === 'email') ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+      }
+      f.classList.toggle('invalid', !ok);
+      if (!ok && !firstBad) firstBad = f;
+    });
+    if (firstBad){
+      firstBad.scrollIntoView({block:'center'});
+      const t = firstBad.querySelector('input, textarea, select');
+      if (t) t.focus({preventScroll:true});
+    }
+    return !firstBad;
+  }
+
+  form.addEventListener('input', e => {
+    const f = e.target.closest('.field.invalid');
+    if (f) f.classList.remove('invalid');
+  });
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    statusEl.textContent = ''; statusEl.className = 'form-status';
+    if (!validate()){
+      statusEl.textContent = '표시된 항목을 확인해 주세요.';
+      statusEl.classList.add('error');
+      return;
+    }
+    const keys = ['website','name','phone','email','job','years','fields','experience','link','english','attend','source','referrer','consent'];
+    const data = Object.fromEntries(keys.map(k => [k, valueOf(k)]));
+    btn.disabled = true; btn.textContent = '보내는 중…';
+    try{
+      const res = await fetch(CONFIG.SCRIPT_URL, {
+        method: 'POST',
+        headers: {'Content-Type': 'text/plain;charset=utf-8'},  // preflight 없이 Apps Script로 전송
+        body: JSON.stringify(data),
+      });
+      const out = await res.json();
+      if (!out.ok) throw new Error(out.error || 'fail');
+      form.style.display = 'none';
+      const done = document.getElementById('done');
+      done.style.display = 'block';
+      done.focus();
+    }catch(err){
+      statusEl.textContent = '신청서를 보내지 못했어요. 잠시 후 다시 시도하거나 ' + CONFIG.CONTACT + '로 연락해 주세요.';
+      statusEl.classList.add('error');
+      btn.disabled = false; btn.textContent = '리더 신청하기';
+    }
+  });
+</script>
+</body>
+</html>
