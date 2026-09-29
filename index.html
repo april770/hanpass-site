@@ -430,7 +430,7 @@
     }
     const keys = ['website','name','phone','email','job','years','fields','experience','link','english','attend','source','referrer','consent'];
     const data = Object.fromEntries(keys.map(k => [k, valueOf(k)]));
-    btn.disabled = true; btn.textContent = '보내는 중…';
+       btn.disabled = true; btn.textContent = '보내는 중…'; statusEl.textContent = '신청서를 보내고 있어요. 10초 정도 걸릴 수 있으니 창을 닫지 말아 주세요.';
     try{
       const res = await fetch(CONFIG.SCRIPT_URL, {
         method: 'POST',
