@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>한패스 아카데미 리더 모집</title>
-<meta name="description" content="한국 거주 외국인 팀의 실전 직무 프로젝트를 이끌 한패스 아카데미 리더를 찾습니다. HanWork × Soo & Carrots">
-<meta property="og:title" content="한패스 아카데미 리더 모집">
+<title>Passmakers - 한패스 부트캠프 리더 모집</title>
+<meta name="description" content="한국 거주 외국인 팀의 실전 직무 프로젝트를 이끌 한패스 부트캠프 리더를 찾습니다. HanWork × Soo & Carrots">
+<meta property="og:title" content="Passmakers - 한패스 부트캠프 리더 모집">
 <meta property="og:description" content="외국인 인재와 한국 회사 사이의 간격, 함께 건너 줄 실무자를 찾습니다.">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
@@ -33,7 +33,8 @@
   /* Hero */
   .hero{padding:3.5rem 0 3rem;border-bottom:1px solid var(--line)}
   .brand{font-size:.875rem;color:var(--slate);margin:0 0 2.5rem}
-  .brand strong{display:block;font-size:1rem;color:var(--ink);margin-bottom:.15rem}
+  .brand strong{display:block;font-size:1.75rem;font-weight:800;letter-spacing:-.01em;color:var(--ink);line-height:1.2;margin-bottom:.35rem}
+  .brand .sub{display:block;font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:.15rem}
   .gap-mark{
     display:flex;align-items:center;gap:.4em;margin:0 0 2rem;
     font-weight:900;letter-spacing:-.04em;line-height:1;
@@ -90,8 +91,18 @@
   }
   ol.steps strong{display:block}
 
-  .promise{background:var(--white);border-left:6px solid var(--signal);padding:1rem 1.25rem;margin-top:1.25rem}
-  .promise p:last-child{margin:0}
+  /* Pay highlight */
+  .pay-hero{background:var(--signal);color:var(--ink);padding:1rem 1.25rem;margin:0 0 2rem;display:flex;flex-wrap:wrap;align-items:baseline;gap:.25rem .9rem}
+  .pay-hero .label{font-size:.875rem;font-weight:700}
+  .pay-hero strong{font-size:clamp(1.6rem,6vw,2.1rem);font-weight:900;letter-spacing:-.02em;line-height:1.2}
+  .pay-hero .detail{font-size:.9375rem;font-weight:600}
+  .pay-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:0 0 1.25rem}
+  .pay-grid div{background:var(--white);padding:1rem}
+  .pay-grid .k{display:block;font-size:.8125rem;color:var(--slate)}
+  .pay-grid .v{display:block;font-size:1.375rem;font-weight:800;letter-spacing:-.01em;line-height:1.35}
+  .pay-grid .total{background:var(--ink);color:var(--white)}
+  .pay-grid .total .k{color:#C9CCE0}
+  @media (max-width:520px){.pay-grid{grid-template-columns:1fr}}
 
   /* Form */
   #apply{border-bottom:0}
@@ -118,6 +129,9 @@
   summary{cursor:pointer;font-weight:700}
   details table{margin-top:.6rem;font-size:.875rem}
   .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .file-box{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .9rem;border:1px dashed #B9BEC9;background:var(--white);padding:.8rem}
+  .file-box input[type=file]{font:inherit;font-size:.9375rem;max-width:100%}
+  .invalid .file-box{border-color:var(--error)}
   .form-status{margin-top:1rem;font-weight:700}
   .form-status.error{color:var(--error)}
 
@@ -131,22 +145,42 @@
 
 <header class="hero">
   <div class="wrap">
-    <p class="brand"><strong>한패스 아카데미 리더 모집</strong>HanWork(한패스) × Soo &amp; Carrots</p>
+    <p class="brand"><strong>Passmakers</strong><span class="sub">한패스 부트캠프 리더 모집</span>HanWork(한패스) × Soo &amp; Carrots</p>
     <div class="gap-mark" aria-label="PASS THE GAP">
       <span>PASS</span><span class="bridge" aria-hidden="true">THE</span><span>GAP</span>
     </div>
     <h1>외국인 인재와 한국 회사 사이의 간격,<br>함께 건너 줄 리더를 찾습니다.</h1>
-    <p class="lead">한국에서 일하고 싶은 외국인 참여자 5명과 한 팀이 되어, 3개월 동안 실제 직무 프로젝트를 이끌어 주실 한패스 아카데미 리더를 모집합니다.</p>
+    <p class="lead">한국에서 일하고 싶은 외국인 참여자 5명과 한 팀이 되어, 3개월 동안 실제 직무 프로젝트를 이끌어 주실 한패스 부트캠프 리더를 모집합니다.</p>
     <dl class="facts">
       <div><dt>활동 기간</dt><dd>2026년 10월 ~ 12월</dd></div>
       <div><dt>장소</dt><dd>서울 한패스 B2 공간</dd></div>
       <div><dt>모집 인원</dt><dd>리더 10명</dd></div>
     </dl>
+    <div class="pay-hero">
+      <span class="label">리더 활동비</span>
+      <strong>총 180만원 <small style="font-size:.5em;font-weight:700">(세전)</small></strong>
+      <span class="detail">밋업 1회(2~3시간)당 30만원 × 6회</span>
+    </div>
     <a class="btn" href="#apply">리더 신청하기</a>
   </div>
 </header>
 
 <main>
+  <section>
+    <div class="wrap">
+      <h2>리더에게 드리는 것</h2>
+      <div class="pay-grid">
+        <div><span class="k">밋업 1회</span><span class="v">30만원 <small style="font-size:.6em;font-weight:600;color:var(--slate)">(세전)</small></span></div>
+        <div><span class="k">밋업 시간</span><span class="v">회당 2~3시간</span></div>
+        <div class="total"><span class="k">6회 합계</span><span class="v">총 180만원 <small style="font-size:.6em;font-weight:600">(세전)</small></span></div>
+      </div>
+      <ul>
+        <li>외국인 인재 팀을 이끌며 쌓는 실무 PM·멘토링 경험</li>
+        <li>연말 행사에서 리더 소개, 한패스·참여 기업과의 네트워킹</li>
+      </ul>
+    </div>
+  </section>
+
   <section>
     <div class="wrap">
       <h2>리더가 하는 일</h2>
@@ -176,18 +210,18 @@
   <section>
     <div class="wrap">
       <h2>일정</h2>
-      <p>6번의 밋업과 연말 행사에 모두 오프라인으로 참여해 주셔야 합니다.</p>
+      <p>6번의 밋업과 연말 행사에 모두 오프라인으로 참여해 주셔야 합니다. 밋업은 회당 2~3시간 진행됩니다.</p>
       <div class="table-scroll">
         <table>
           <thead><tr><th>일정</th><th>회차</th><th>내용</th></tr></thead>
           <tbody>
-            <tr><td class="date">10/24 (예정)</td><td>1차 밋업</td><td>Challenge Build Day, 팀 배정</td></tr>
+            <tr><td class="date">10/24 (토) 오후 3시</td><td>1차 밋업</td><td>Challenge Build Day, 팀 배정</td></tr>
             <tr><td class="date">팀별 선택</td><td>2~6차 밋업</td><td>팀원들과 논의해 일정 선택</td></tr>
             <tr><td class="date">12/18 (금)</td><td>연말 행사</td><td>Year-end Showcase Night 오프라인 참석</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="note" style="margin:.75rem 0 0;font-size:.8125rem">(일정은 변동될 수 있음. 정확한 날짜 안내 예정)</p>
+      <p class="note" style="margin:.75rem 0 0;font-size:.8125rem">(2~6차 밋업 일정은 팀별로 정하며, 일정은 변동될 수 있습니다.)</p>
     </div>
   </section>
 
@@ -199,19 +233,6 @@
         <li>팀이나 프로젝트를 이끌어 본 경험, 또는 멘토링·스터디 운영 경험이 있는 분</li>
         <li>한국어가 서툰 팀원과도 차분하게 소통할 수 있는 분</li>
       </ul>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <h2>리더에게 드리는 것</h2>
-      <ul>
-        <li>리더 활동비 <span class="note">(금액은 신청서 작성 시 개별 안내)</span></li>
-        <li>연말 행사에서 리더 소개, 한패스·참여 기업과의 네트워킹</li>
-      </ul>
-      <div class="promise">
-        <p><strong>팀원들이 리더를 기준으로 움직이기 때문에 중도 이탈은 원칙적으로 어렵습니다.</strong> 불가피한 경우 대체 리더에게 인수인계를 마쳐야 하며, 활동비는 진행한 회차까지 지급됩니다.</p>
-      </div>
     </div>
   </section>
 
@@ -295,6 +316,14 @@
           <input id="f_link" name="link" type="url" placeholder="https://">
         </div>
 
+        <div class="field" data-req data-type="pdf">
+          <label for="f_resume">이력서/포트폴리오 (PDF)<span class="req">*</span><span class="hint">이력서나 포트폴리오를 PDF 파일 1개(10MB 이하)로 올려 주세요. 양식은 자유예요.</span></label>
+          <div class="file-box">
+            <input id="f_resume" name="resume" type="file" accept="application/pdf,.pdf">
+          </div>
+          <span class="err" id="resumeErr">이력서/포트폴리오 PDF 파일을 올려 주세요.</span>
+        </div>
+
         <div class="field" data-req data-group="english">
           <span class="q">영어로 소통할 수 있나요?<span class="req">*</span><span class="hint">필수 조건은 아니에요. 팀 활동은 주로 한국어로 진행합니다.</span></span>
           <div class="choices">
@@ -337,11 +366,11 @@
         <details>
           <summary>개인정보 수집·이용 안내</summary>
           <table>
-            <tr><th>수집 주체</th><td>수앤캐롯츠 (한패스 아카데미 운영사)</td></tr>
-            <tr><th>목적</th><td>한패스 아카데미 리더 선발 심사, 선발 안내, 계약 연락</td></tr>
-            <tr><th>항목</th><td>이름, 휴대전화 번호, 이메일, 회사·직무, 경력, 리드 가능 분야, 경험, 링크, 영어 소통, 참여 가능 여부, 신청 경로, 추천인</td></tr>
+            <tr><th>수집 주체</th><td>수앤캐롯츠 (한패스 부트캠프 운영사)</td></tr>
+            <tr><th>목적</th><td>한패스 부트캠프 리더 선발 심사, 선발 안내, 계약 연락</td></tr>
+            <tr><th>항목</th><td>이름, 휴대전화 번호, 이메일, 회사·직무, 경력, 리드 가능 분야, 경험, 링크, 이력서/포트폴리오(PDF), 영어 소통, 참여 가능 여부, 신청 경로, 추천인</td></tr>
             <tr><th>보유 기간</th><td>선발되지 않은 경우 선발 종료 후 30일 이내 파기. 선발된 경우 계약 관계 종료 후 관련 법령에 따른 기간까지 보관</td></tr>
-            <tr><th>국외 보관</th><td>신청 내용은 Google LLC의 서버(미국 등)에 저장됩니다.</td></tr>
+            <tr><th>국외 보관</th><td>신청 내용과 첨부 파일은 Google LLC의 서버(미국 등)에 저장됩니다.</td></tr>
             <tr><th>거부 권리</th><td>동의를 거부할 수 있으나, 거부 시 신청이 불가합니다.</td></tr>
           </table>
         </details>
@@ -367,7 +396,7 @@
 
 <footer>
   <div class="wrap">
-    <p style="margin:0">한패스 아카데미<br>주최 HanWork(한패스) / 운영 수앤캐롯츠<br>문의 <span class="contact"></span></p>
+    <p style="margin:0">Passmakers - 한패스 부트캠프<br>주최 HanWork(한패스) / 운영 수앤캐롯츠<br>문의 <span class="contact"></span></p>
   </div>
 </footer>
 
@@ -393,6 +422,27 @@
     return els[0].value.trim();
   }
 
+  const MAX_PDF_MB = 10;
+  function checkPdf(f){
+    const input = f.querySelector('input[type=file]');
+    const err = document.getElementById('resumeErr');
+    const file = input.files[0];
+    if (!file){ err.textContent = '이력서/포트폴리오 PDF 파일을 올려 주세요.'; return false; }
+    const isPdf = file.type === 'application/pdf' || /\.pdf$/i.test(file.name);
+    if (!isPdf){ err.textContent = 'PDF 파일만 올릴 수 있어요.'; return false; }
+    if (file.size > MAX_PDF_MB * 1024 * 1024){ err.textContent = `파일이 너무 커요. ${MAX_PDF_MB}MB 이하로 올려 주세요.`; return false; }
+    return true;
+  }
+
+  function readAsBase64(file){
+    return new Promise((resolve, reject) => {
+      const fr = new FileReader();
+      fr.onload = () => resolve(String(fr.result).split(',')[1] || '');
+      fr.onerror = () => reject(fr.error);
+      fr.readAsDataURL(file);
+    });
+  }
+
   function validate(){
     let firstBad = null;
     form.querySelectorAll('.field[data-req]').forEach(f => {
@@ -400,6 +450,12 @@
       if (f.dataset.group){
         ok = !!f.querySelector('input:checked');
       } else {
+        if (f.dataset.type === 'pdf'){
+          ok = checkPdf(f);
+          f.classList.toggle('invalid', !ok);
+          if (!ok && !firstBad) firstBad = f;
+          return;
+        }
         const v = f.querySelector('input, textarea, select').value.trim();
         ok = v.length > 0;
         if (ok && f.dataset.type === 'email') ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
@@ -414,6 +470,11 @@
     }
     return !firstBad;
   }
+
+  document.getElementById('f_resume').addEventListener('change', e => {
+    const f = e.target.closest('.field');
+    f.classList.toggle('invalid', !checkPdf(f));
+  });
 
   form.addEventListener('input', e => {
     const f = e.target.closest('.field.invalid');
@@ -430,8 +491,11 @@
     }
     const keys = ['website','name','phone','email','job','years','fields','experience','link','english','attend','source','referrer','consent'];
     const data = Object.fromEntries(keys.map(k => [k, valueOf(k)]));
-    btn.disabled = true; btn.textContent = '보내는 중…'; statusEl.textContent = '신청서를 보내고 있어요. 10초 정도 걸릴 수 있으니 창을 닫지 말아 주세요.';
+    btn.disabled = true; btn.textContent = '보내는 중…'; statusEl.textContent = '신청서와 첨부 파일을 보내고 있어요. 10~20초 정도 걸릴 수 있으니 창을 닫지 말아 주세요.';
     try{
+      const file = document.getElementById('f_resume').files[0];
+      data.resumeName = file.name;
+      data.resumeData = await readAsBase64(file);
       await fetch(CONFIG.SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',  // 구글 응답을 읽지 않고 전송만 함 (응답 읽기 실패로 오류가 뜨는 문제 방지)
