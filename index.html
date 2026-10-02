@@ -6,7 +6,15 @@
 <title>Passmakers - 한패스 부트캠프 리더 모집</title>
 <meta name="description" content="한국 거주 외국인 팀의 실전 직무 프로젝트를 이끌 한패스 부트캠프 리더를 찾습니다. HanWork × Soo & Carrots">
 <meta property="og:title" content="Passmakers - 한패스 부트캠프 리더 모집">
-<meta property="og:description" content="외국인 인재와 한국 회사 사이의 간격, 함께 건너 줄 실무자를 찾습니다.">
+<meta property="og:description" content="외국인 인재 5명의 팀을 3개월간 이끌 실무 리더를 찾습니다. 리더 활동비 총 180만원(세전).">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hanpass.soohouse.app/">
+<meta property="og:image" content="https://hanpass.soohouse.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1B1F3B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231B1F3B'/%3E%3Crect x='14' y='38' width='36' height='8' fill='%23F2C230'/%3E%3Ctext x='32' y='34' font-family='Arial,Helvetica,sans-serif' font-size='30' font-weight='900' fill='%23fff' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
   :root{
@@ -31,21 +39,23 @@
   .wrap{max-width:var(--measure);margin:0 auto;padding:0 1.25rem}
 
   /* Hero */
-  .hero{padding:3.5rem 0 3rem;border-bottom:1px solid var(--line)}
-  .brand{font-size:.875rem;color:var(--slate);margin:0 0 2.5rem}
-  .brand strong{display:block;font-size:1.75rem;font-weight:800;letter-spacing:-.01em;color:var(--ink);line-height:1.2;margin-bottom:.35rem}
-  .brand .sub{display:block;font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:.15rem}
+  .hero{padding:2.25rem 0 3rem;border-bottom:1px solid var(--line)}
+  @media (min-width:600px){.hero{padding-top:3.5rem}}
+  .brand{font-size:.8125rem;color:var(--slate);margin:0 0 1rem;display:flex;flex-wrap:wrap;gap:.25rem .6rem;align-items:center}
+  .brand .tag{background:var(--ink);color:var(--white);font-weight:700;padding:.15rem .55rem;font-size:.8125rem}
+  .wordmark{margin:0 0 .6rem;font-weight:900;letter-spacing:-.045em;line-height:1;font-size:clamp(3rem,13vw,5.5rem);color:var(--ink)}
   .gap-mark{
-    display:flex;align-items:center;gap:.4em;margin:0 0 2rem;
-    font-weight:900;letter-spacing:-.04em;line-height:1;
-    font-size:clamp(2.6rem,11vw,5.25rem);
+    display:flex;align-items:center;gap:.4em;margin:0 0 1.5rem;max-width:17rem;
+    font-weight:900;letter-spacing:-.02em;line-height:1;color:var(--slate);
+    font-size:1.25rem;
   }
+  .gap-mark .bridge{height:1.5em !important;font-size:.5em !important;}
   .gap-mark .bridge{
     flex:1;min-width:6em;height:1.9em;background:var(--signal);
     display:flex;align-items:center;justify-content:center;
     font-size:.32em;letter-spacing:.02em;font-weight:800;
   }
-  h1{font-size:clamp(1.5rem,4.4vw,2rem);line-height:1.4;margin:0 0 1rem;font-weight:800;letter-spacing:-.02em}
+  h1{font-size:clamp(1.375rem,4.4vw,2rem);line-height:1.4;margin:0 0 1.25rem;font-weight:800;letter-spacing:-.02em}
   .lead{color:var(--slate);margin:0 0 2rem}
   .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:0 0 2rem}
   .facts div{background:var(--white);padding:.9rem 1rem}
@@ -92,7 +102,7 @@
   ol.steps strong{display:block}
 
   /* Pay highlight */
-  .pay-hero{background:var(--signal);color:var(--ink);padding:1rem 1.25rem;margin:0 0 2rem;display:flex;flex-wrap:wrap;align-items:baseline;gap:.25rem .9rem}
+  .pay-hero{background:var(--signal);color:var(--ink);padding:1rem 1.25rem;margin:0 0 1.5rem;display:flex;flex-wrap:wrap;align-items:baseline;gap:.25rem .9rem}
   .pay-hero .label{font-size:.875rem;font-weight:700}
   .pay-hero strong{font-size:clamp(1.6rem,6vw,2.1rem);font-weight:900;letter-spacing:-.02em;line-height:1.2}
   .pay-hero .detail{font-size:.9375rem;font-weight:600}
@@ -105,7 +115,6 @@
   @media (max-width:520px){.pay-grid{grid-template-columns:1fr}}
 
   /* Form */
-  #apply{border-bottom:0}
   form{background:var(--white);border:1px solid var(--line);padding:1.5rem 1.25rem}
   @media (min-width:600px){form{padding:2rem}}
   .field{margin:0 0 1.35rem}
@@ -139,34 +148,85 @@
   .done h2{margin-bottom:.75rem}
 
   footer{padding:2.5rem 0 3.5rem;font-size:.875rem;color:var(--slate)}
+
+  /* Section rhythm */
+  section.sec-white{background:var(--white)}
+  #apply{background:var(--ink);border-bottom:0}
+  #apply > .wrap > h2{color:var(--white)}
+  #apply .apply-sub{color:#C9CCE0;margin:-.4rem 0 1.25rem;font-size:.9375rem}
+  #apply form{border-color:transparent}
+
+  /* Schedule as cards on small screens */
+  @media (max-width:520px){
+    .table-scroll{border:0;overflow:visible}
+    .schedule thead{display:none}
+    .schedule, .schedule tbody{display:block;background:transparent}
+    .schedule tr{display:grid;grid-template-columns:auto 1fr;gap:.15rem .6rem;background:var(--white);border:1px solid var(--line);padding:.8rem 1rem;margin:0 0 .5rem}
+    .schedule td{border:0;padding:0;white-space:normal}
+    .schedule td.date{font-weight:800}
+    .schedule td.date + td{color:var(--slate);font-size:.875rem;align-self:center;justify-self:end}
+    .schedule td:last-child{grid-column:1 / -1}
+  }
+
+  /* File picker */
+  .file-box{position:relative}
+  .file-box input[type=file]{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
+  .file-btn{display:inline-block;background:var(--ink);color:var(--white);font-weight:700;font-size:.9375rem;padding:.55rem 1rem;cursor:pointer}
+  .file-btn:hover{background:#2C3160}
+  .file-box input[type=file]:focus-visible + .file-btn{outline:3px solid var(--ink);outline-offset:3px}
+  .file-name{font-size:.9375rem;color:var(--slate);word-break:break-all}
+  .file-name.has{color:var(--ink);font-weight:600}
+
+  /* Field checkboxes in 2 columns on wider screens */
+  @media (min-width:600px){.choices.cols2{grid-template-columns:1fr 1fr;gap:.6rem 1rem}}
+
+  /* Sticky mobile CTA */
+  .sticky-cta{display:none}
+  @media (max-width:720px){
+    .sticky-cta{
+      display:flex;align-items:center;justify-content:space-between;gap:.75rem;
+      position:fixed;left:0;right:0;bottom:0;z-index:20;
+      background:var(--ink);color:var(--white);text-decoration:none;
+      padding:.8rem 1.25rem calc(.8rem + env(safe-area-inset-bottom));
+      transform:translateY(110%);transition:transform .2s ease;
+    }
+    .sticky-cta.show{transform:none}
+    .sticky-cta .pay{font-size:.8125rem;color:#E4E6F2;line-height:1.35}
+    .sticky-cta .pay b{display:block;white-space:nowrap}
+    .sticky-cta .pay b{color:var(--signal);font-size:1rem}
+    .sticky-cta .go{background:var(--signal);color:var(--ink);font-weight:800;padding:.55rem .9rem;white-space:nowrap}
+    footer{padding-bottom:6rem}
+  }
+  @media (prefers-reduced-motion:reduce){.sticky-cta{transition:none}}
 </style>
 </head>
 <body>
 
 <header class="hero">
   <div class="wrap">
-    <p class="brand"><strong>Passmakers</strong><span class="sub">한패스 부트캠프 리더 모집</span>HanWork(한패스) × Soo &amp; Carrots</p>
+    <p class="brand"><span class="tag">한패스 부트캠프 리더 모집</span><span>HanWork(한패스) × Soo &amp; Carrots</span></p>
+    <p class="wordmark">Passmakers</p>
     <div class="gap-mark" aria-label="PASS THE GAP">
       <span>PASS</span><span class="bridge" aria-hidden="true">THE</span><span>GAP</span>
     </div>
     <h1>외국인 인재와 한국 회사 사이의 간격,<br>함께 건너 줄 리더를 찾습니다.</h1>
+    <div class="pay-hero">
+      <span class="label">리더 활동비</span>
+      <strong>총 180만원 <small style="font-size:.5em;font-weight:700">(세전)</small></strong>
+      <span class="detail">밋업 1회(2~3시간)당 30만원 × 6회</span>
+    </div>
     <p class="lead">한국에서 일하고 싶은 외국인 참여자 5명과 한 팀이 되어, 3개월 동안 실제 직무 프로젝트를 이끌어 주실 한패스 부트캠프 리더를 모집합니다.</p>
     <dl class="facts">
       <div><dt>활동 기간</dt><dd>2026년 10월 ~ 12월</dd></div>
       <div><dt>장소</dt><dd>서울 한패스 B2 공간</dd></div>
       <div><dt>모집 인원</dt><dd>리더 10명</dd></div>
     </dl>
-    <div class="pay-hero">
-      <span class="label">리더 활동비</span>
-      <strong>총 180만원 <small style="font-size:.5em;font-weight:700">(세전)</small></strong>
-      <span class="detail">밋업 1회(2~3시간)당 30만원 × 6회</span>
-    </div>
-    <a class="btn" href="#apply">리더 신청하기</a>
+    <a class="btn" id="heroCta" href="#apply">리더 신청하기</a>
   </div>
 </header>
 
 <main>
-  <section>
+  <section class="sec-white">
     <div class="wrap">
       <h2>리더에게 드리는 것</h2>
       <div class="pay-grid">
@@ -212,7 +272,7 @@
       <h2>일정</h2>
       <p>6번의 밋업과 연말 행사에 모두 오프라인으로 참여해 주셔야 합니다. 밋업은 회당 2~3시간 진행됩니다.</p>
       <div class="table-scroll">
-        <table>
+        <table class="schedule">
           <thead><tr><th>일정</th><th>회차</th><th>내용</th></tr></thead>
           <tbody>
             <tr><td class="date">10/24 (토) 오후 3시</td><td>1차 밋업</td><td>Challenge Build Day, 팀 배정</td></tr>
@@ -250,6 +310,7 @@
   <section id="apply">
     <div class="wrap">
       <h2>리더 신청하기</h2>
+      <p class="apply-sub">작성은 5분 정도 걸려요. 이력서/포트폴리오 PDF를 미리 준비해 주세요.</p>
 
       <form id="leaderForm" novalidate>
         <div class="hp" aria-hidden="true">
@@ -294,7 +355,7 @@
 
         <div class="field" data-req data-group="fields">
           <span class="q">리드할 수 있는 분야<span class="req">*</span><span class="hint">가능한 분야를 모두 골라 주세요.</span></span>
-          <div class="choices">
+          <div class="choices cols2">
             <label><input type="checkbox" name="fields" value="마케팅·커뮤니케이션"><span>마케팅·커뮤니케이션 <span class="en">Marketing &amp; Communications</span></span></label>
             <label><input type="checkbox" name="fields" value="상품·서비스 기획"><span>상품·서비스 기획 <span class="en">Product &amp; Service Planning</span></span></label>
             <label><input type="checkbox" name="fields" value="UX 리서치·프로덕트 디자인"><span>UX 리서치·프로덕트 디자인 <span class="en">UX Research &amp; Product Design</span></span></label>
@@ -319,7 +380,9 @@
         <div class="field" data-req data-type="pdf">
           <label for="f_resume">이력서/포트폴리오 (PDF)<span class="req">*</span><span class="hint">이력서나 포트폴리오를 PDF 파일 1개(10MB 이하)로 올려 주세요. 양식은 자유예요.</span></label>
           <div class="file-box">
-            <input id="f_resume" name="resume" type="file" accept="application/pdf,.pdf">
+            <input id="f_resume" name="resume" type="file" accept="application/pdf,.pdf" aria-describedby="resumeName">
+            <label class="file-btn" for="f_resume">PDF 파일 선택</label>
+            <span class="file-name" id="resumeName">선택된 파일이 없어요</span>
           </div>
           <span class="err" id="resumeErr">이력서/포트폴리오 PDF 파일을 올려 주세요.</span>
         </div>
@@ -393,6 +456,11 @@
     </div>
   </section>
 </main>
+
+<a class="sticky-cta" id="stickyCta" href="#apply" aria-hidden="true" tabindex="-1">
+  <span class="pay">리더 활동비<b>총 180만원 (세전)</b></span>
+  <span class="go">리더 신청하기</span>
+</a>
 
 <footer>
   <div class="wrap">
@@ -471,7 +539,22 @@
     return !firstBad;
   }
 
+  /* 모바일 하단 고정 버튼: 첫 화면 버튼이 안 보이고, 신청 영역 밖일 때만 표시 */
+  (function(){
+    const sticky = document.getElementById('stickyCta');
+    if (!('IntersectionObserver' in window)) return;
+    let heroVisible = true, applyVisible = false;
+    const update = () => sticky.classList.toggle('show', !heroVisible && !applyVisible);
+    // 첫 화면 버튼이 화면 위로 지나간 뒤에만 표시 (아직 아래에 있을 때는 숨김)
+    new IntersectionObserver(es => { const e = es[0]; heroVisible = e.isIntersecting || e.boundingClientRect.top > 0; update(); }).observe(document.getElementById('heroCta'));
+    new IntersectionObserver(es => { applyVisible = es[0].isIntersecting; update(); }, {rootMargin:'0px 0px -30% 0px'}).observe(document.getElementById('apply'));
+  })();
+
   document.getElementById('f_resume').addEventListener('change', e => {
+    const nameEl = document.getElementById('resumeName');
+    const file = e.target.files[0];
+    nameEl.textContent = file ? file.name : '선택된 파일이 없어요';
+    nameEl.classList.toggle('has', !!file);
     const f = e.target.closest('.field');
     f.classList.toggle('invalid', !checkPdf(f));
   });
