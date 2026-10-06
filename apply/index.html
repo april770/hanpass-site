@@ -633,9 +633,12 @@
     const keys = ['website','name','email','phone','nationality','region','visa','status','topik','korean','field1','field2','attend','motivation','video','hanwork','source','consent','media','news'];
     const data = Object.fromEntries(keys.map(k => [k, valueOf(k)]));
     data.inflow = INFLOW || '직접 방문';
-    btn.disabled = true; btn.textContent = '보내는 중…'; statusEl.textContent = '신청서를 보내고 있어요. 10초 정도 걸릴 수 있으니 창을 닫지 말아 주세요.';
+    btn.disabled = true; btn.textContent = '보내는 중…'; statusEl.textContent = '신청서를 보내고 있어요. 잠시만 기다려 주세요.';
     try{
-      await fetch(CONFIG.SCRIPT_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(data) });
+      // keepalive: 접수 화면으로 바뀌거나 창을 닫아도 전송은 끝까지 진행됨
+      // 네트워크 오류는 보통 바로 나므로, 3초 안에 오류가 없으면 접수 화면을 먼저 보여 줌
+      const send = fetch(CONFIG.SCRIPT_URL, { method:'POST', mode:'no-cors', keepalive:true, headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(data) });
+      await Promise.race([send, new Promise(r => setTimeout(r, 3000))]);
       form.style.display = 'none';
       statusEl.textContent = '';
       const done = document.getElementById('done'); done.style.display = 'block'; done.focus();
