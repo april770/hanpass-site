@@ -293,6 +293,35 @@
   .meta i{width:1px;height:1.6rem;background:var(--line)}
   .meta .btn{margin-left:auto}
   @media (max-width:600px){.meta .btn{margin-left:0;width:100%;justify-content:center}}
+  /* 혜택 */
+  .sub-h{margin:2.75rem 0 1rem}
+  .lead2{margin-bottom:0}
+  .lead2 b{font-weight:800}
+  .bnf{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,1fr);column-gap:2rem;border-top:1px solid var(--line)}
+  .bnf li{padding:1.25rem 0 1.35rem;border-bottom:1px solid var(--line)}
+  .bnf .n{display:block;font-family:'ArchivoWide',var(--ar);font-weight:700;font-size:.75rem;letter-spacing:.08em;color:var(--acc-text);margin-bottom:.45rem}
+  .bnf strong{display:block;font-size:1.1875rem;font-weight:800;letter-spacing:-.035em;line-height:1.35;margin-bottom:.3rem}
+  .bnf .d{display:block;color:var(--sub);font-size:.9375rem;line-height:1.6}
+  @media (max-width:860px){.bnf{grid-template-columns:1fr 1fr}}
+  @media (max-width:560px){.bnf{grid-template-columns:1fr}.bnf li{padding:1rem 0 1.1rem}}
+  .free{margin:2rem 0 0;background:var(--fg);color:var(--bg);padding:1.5rem 1.75rem;display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 2.5rem}
+  .free-h{margin:0;font-size:clamp(1.75rem,4.5vw,2.375rem);font-weight:900;letter-spacing:-.045em;line-height:1.1;white-space:nowrap}
+  .free-h .pct{color:var(--acc)}
+  .free-h .num{font-weight:900}
+  .free ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem 0;font-weight:700;font-size:1rem;letter-spacing:-.02em}
+  .free li:not(:last-child)::after{content:"·";margin:0 .6rem;opacity:.45}
+  @media (max-width:560px){.free{padding:1.25rem 1.25rem}.free ul{display:grid;grid-template-columns:1fr 1fr;gap:.4rem 1rem;font-size:.9375rem}.free li:not(:last-child)::after{content:none}.free li::before{content:"✓ ";color:var(--acc)}}
+  .net{margin:2.25rem 0 0;display:grid;gap:.75rem}
+  .net ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem 2rem}
+  .net li{border-left:2px solid var(--acc);padding:.1rem 0 .1rem .9rem;font-size:.9875rem;line-height:1.6}
+  .net li b{font-weight:800}
+  @media (max-width:860px){.net ul{grid-template-columns:1fr}}
+  /* 참여 대상 */
+  .who{list-style:none;counter-reset:w;padding:0;margin:0 0 2.5rem;display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:2px solid var(--fg)}
+  .who li{counter-increment:w;padding:1rem 1.25rem 1.1rem 0;font-size:1.125rem;font-weight:800;letter-spacing:-.035em;line-height:1.4;border-bottom:1px solid var(--line)}
+  .who li+li{padding-left:1.25rem;border-left:1px solid var(--line)}
+  .who li::before{content:counter(w,decimal-leading-zero);display:block;font-family:'ArchivoWide',var(--ar);font-size:.75rem;letter-spacing:.08em;color:var(--acc-text);margin-bottom:.4rem}
+  @media (max-width:760px){.who{grid-template-columns:1fr}.who li+li{padding-left:0;border-left:0}}
   footer .wm{width:10rem}
 </style>
 </head>
@@ -324,14 +353,29 @@
 <main>
   <section>
     <div class="wrap">
-      <div class="sec-head"><span class="mono">01 · Program</span><h2>한패스의 진짜 과제를<br>팀으로 해결하는 3개월</h2></div>
-      <p class="lead2">한국에 사는 외국인 50명이 10개 팀으로 나뉘어, 한국인 현업 리더와 함께 한패스의 실무 과제를 해결해요.</p>
-      <ul class="gets">
-        <li><span class="n">01</span><strong>포트폴리오가 되는 결과물</strong></li>
-        <li><span class="n">02</span><strong>현업 리더의 피드백</strong></li>
-        <li><span class="n">03</span><strong>한국어로 일하는 팀 경험</strong></li>
-        <li><span class="n">04</span><strong>12.18 Showcase<br>시상과 선물</strong></li>
+      <div class="sec-head"><span class="mono">01 · Program</span><h2>한국에서 보여줄 실무 경험,<br>직접 만들어요</h2></div>
+      <p class="lead2">200여 개국 송금 서비스를 운영하는 코스닥 상장 글로벌 핀테크 <b>한패스</b>의 실제 비즈니스 과제를, 한국에 사는 외국인 50명이 10개 팀으로 나뉘어 현업 리더와 함께 해결해요.</p>
+      <p class="mono sub-h">What you get · 참가자가 얻어 가는 것</p>
+      <ul class="bnf">
+        <li><span class="n">01</span><strong>희망 직무의 실무 프로젝트</strong><span class="d">강의를 듣는 게 아니라, 직접 기획하고 실행해서 완성해요.</span></li>
+        <li><span class="n">02</span><strong>포트폴리오·이력서·면접 스토리</strong><span class="d">프로젝트 결과를 취업에 바로 쓸 수 있게 정리해요.</span></li>
+        <li><span class="n">03</span><strong>현업 리더의 피드백·코칭</strong><span class="d">실무 경험이 있는 리더가 팀마다 함께해요.</span></li>
+        <li><span class="n">04</span><strong>한국어로 일하는 팀 경험</strong><span class="d">같은 직무를 준비하는 외국인 동료 4명과 협업해요.</span></li>
+        <li><span class="n">05</span><strong>실전 프레젠테이션</strong><span class="d">12.18 Showcase Night에서 최종 결과를 발표해요.</span></li>
+        <li><span class="n">06</span><strong>총 <span class="num">100</span>만원 상당 시상</strong><span class="d">Showcase Night 수상자에게 시상품을 드려요.</span></li>
       </ul>
+      <div class="free">
+        <p class="free-h"><span class="pct"><span class="num">100</span>%</span> 무료</p>
+        <ul><li>참가비</li><li>멘토링·프로젝트 코칭</li><li>오프라인 밋업 공간</li><li>실무 과제·프로젝트 자료</li><li>간식 등 진행 비용</li></ul>
+      </div>
+      <div class="net">
+        <span class="mono">Network</span>
+        <ul>
+          <li>한국 취업에 실질적으로 도움을 줄 <b>현직 리더·멘토</b>와의 만남</li>
+          <li>같은 직무를 준비하거나 한국에서 일하는 <b>외국인 동료</b>와의 팀 협업</li>
+          <li>프로그램이 끝난 뒤에도 <b>HanWork 커뮤니티</b>로 커리어 정보와 기회 연결</li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -345,12 +389,17 @@
 
   <section>
     <div class="wrap">
-      <div class="sec-head"><span class="mono">03 · Schedule</span><h2>일정</h2></div>
+      <div class="sec-head"><span class="mono">03 · Who &amp; When</span><h2>참여 대상과 일정</h2></div>
+      <ol class="who">
+        <li>한국에 거주하는 외국인</li>
+        <li>한국어로 일상 대화가 가능한 분</li>
+        <li>밋업 6회와 Showcase Night에 모두 <b>오프라인으로</b> 참여할 수 있는 분</li>
+      </ol>
       <div class="sched2">
         <ul class="timeline">
           <li><span class="step">Apply</span><span class="when">~<span class="num">10.19</span> (월)</span><span class="what">신청 마감 · 결과는 10월 20일(화) 이메일로 안내</span></li>
           <li class="now"><span class="step">Meetup 01</span><span class="when"><span class="num">10.24</span> (토) 오후 <span class="num">3</span>시</span><span class="what">팀 배정 · 오리엔테이션</span></li>
-          <li><span class="step">02 – 06</span><span class="when">팀별 선택</span><span class="what">팀원들과 함께 일정을 정해요</span></li>
+          <li><span class="step">02 – 06</span><span class="when">팀별 선택</span><span class="what">팀원과 리더가 함께 일정을 정해요</span></li>
           <li><span class="step">Showcase</span><span class="when"><span class="num">12.18</span> (금)</span><span class="what">Year-end Showcase Night</span></li>
         </ul>
         <figure class="place">
@@ -365,7 +414,7 @@
     <div class="wrap">
       <div class="sec-head"><span class="mono">04 · FAQ</span><h2>자주 묻는 질문</h2></div>
       <div class="faq">
-        <details><summary>누가 지원할 수 있나요?</summary><div class="a"><b>한국 거주 외국인</b>이라면 누구나 지원할 수 있어요. 팀 활동은 주로 한국어로 진행해서, 한국어 일상 대화가 가능해야 해요. 모든 모임은 서울 성수에서 오프라인으로 열려요.</div></details>
+        <details><summary>누가 지원할 수 있나요?</summary><div class="a"><b>한국 거주 외국인</b>이라면 누구나 지원할 수 있어요. 팀 활동은 주로 한국어로 진행해서, 한국어 일상 대화가 가능해야 해요. 밋업 6회와 Showcase Night 모두 서울 성수에서 오프라인으로 열려서, 전부 참여할 수 있어야 해요.</div></details>
         <details><summary>비자 종류가 선발에 영향을 주나요?</summary><div class="a">아니요. 비자 정보는 <b>통계용</b>으로만 쓰고, 선발 결과에는 영향을 주지 않아요.</div></details>
         <details><summary>자기소개 영상은 어떻게 내나요?</summary><div class="a">1분 내외로 휴대폰으로 찍어도 괜찮아요. YouTube('일부 공개') 또는 Google Drive('링크가 있는 모든 사용자')에 올리고 링크를 붙여 넣어 주세요. 영상은 <b>선발 심사에만</b> 쓰고 공개하지 않아요.</div></details>
         <details><summary>결과는 언제 알 수 있나요?</summary><div class="a"><b>10월 20일(화)</b>에 신청서에 적은 이메일로 알려 드려요.</div></details>
@@ -452,8 +501,8 @@
 
           <p class="mono" style="color:var(--ink-sub);margin:1.75rem 0 1rem">4 · Availability &amp; Motivation</p>
           <div class="field" data-req data-group="attend">
-            <span class="q">1차 밋업(10월 24일 토 오후 3시)과 Year-end Showcase Night(12월 18일 금)에 참석할 수 있나요?<span class="req">*</span><span class="hint">2~6차 밋업은 팀원과 함께 일정을 정해요.</span></span>
-            <div class="choices"><label><input type="radio" name="attend" value="둘 다 참석 가능"><span>둘 다 참석 가능</span></label><label><input type="radio" name="attend" value="한 번은 어려울 수 있음"><span>한 번은 어려울 수 있음</span></label><label><input type="radio" name="attend" value="잘 모르겠음"><span>잘 모르겠음</span></label></div>
+            <span class="q">밋업 6회와 Showcase Night(12월 18일 금)에 모두 오프라인으로 참여할 수 있나요?<span class="req">*</span><span class="hint">1차 밋업은 10월 24일(토) 오후 3시, 2~6차 밋업은 팀원과 리더가 함께 일정을 정해요.</span></span>
+            <div class="choices"><label><input type="radio" name="attend" value="네, 모두 참여할 수 있어요"><span>네, 모두 참여할 수 있어요</span></label><label><input type="radio" name="attend" value="한두 번은 어려울 수 있어요"><span>한두 번은 어려울 수 있어요</span></label><label><input type="radio" name="attend" value="잘 모르겠어요"><span>잘 모르겠어요</span></label></div>
             <span class="err">하나를 선택해 주세요.</span>
           </div>
           <div class="field" data-req>
