@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Passmakers - 한패스 부트캠프 1기 참가자 모집</title>
-<meta name="description" content="한국에 사는 외국인 50명이 팀을 이뤄 한패스의 실무 과제를 3개월 동안 해결하는 무료 프로그램. 1기 모집 ~10.19(월).">
+<meta name="description" content="한국에 사는 외국인 50명이 팀을 이뤄 한패스의 실무 과제를 해결하는 무료 프로그램. 1기 모집 ~10.19(월).">
 <meta property="og:title" content="Passmakers - 한패스 부트캠프 1기 참가자 모집">
 <meta property="og:description" content="실전 프로젝트에서 시작되는 한국 커리어. 한국 거주 외국인 대상 · 참가비 무료 · ~10.19(월) 마감">
 <meta property="og:type" content="website">
@@ -321,6 +321,7 @@
   .who li{counter-increment:w;padding:1rem 1.25rem 1.1rem 0;font-size:1.125rem;font-weight:800;letter-spacing:-.035em;line-height:1.4;border-bottom:1px solid var(--line)}
   .who li+li{padding-left:1.25rem;border-left:1px solid var(--line)}
   .who li::before{content:counter(w,decimal-leading-zero);display:block;font-family:'ArchivoWide',var(--ar);font-size:.75rem;letter-spacing:.08em;color:var(--acc-text);margin-bottom:.4rem}
+  .who .w-sub{display:block;margin-top:.35rem;font-size:.9375rem;font-weight:600;letter-spacing:-.02em;color:var(--acc-text)}
   @media (max-width:760px){.who{grid-template-columns:1fr}.who li+li{padding-left:0;border-left:0}}
   footer .wm{width:10rem}
 </style>
@@ -392,7 +393,7 @@
       <div class="sec-head"><span class="mono">03 · Who &amp; When</span><h2>참여 대상과 일정</h2></div>
       <ol class="who">
         <li>한국에 거주하는 외국인</li>
-        <li>한국어로 일상 대화가 가능한 분</li>
+        <li>한국어로 일상 대화가 가능한 분<span class="w-sub">TOPIK 3급 정도면 충분해요</span></li>
         <li>밋업 6회와 Showcase Night에 모두 <b>오프라인으로</b> 참여할 수 있는 분</li>
       </ol>
       <div class="sched2">
@@ -414,7 +415,7 @@
     <div class="wrap">
       <div class="sec-head"><span class="mono">04 · FAQ</span><h2>자주 묻는 질문</h2></div>
       <div class="faq">
-        <details><summary>누가 지원할 수 있나요?</summary><div class="a"><b>한국 거주 외국인</b>이라면 누구나 지원할 수 있어요. 팀 활동은 주로 한국어로 진행해서, 한국어 일상 대화가 가능해야 해요. 밋업 6회와 Showcase Night 모두 서울 성수에서 오프라인으로 열려서, 전부 참여할 수 있어야 해요.</div></details>
+        <details><summary>누가 지원할 수 있나요?</summary><div class="a"><b>한국 거주 외국인</b>이라면 누구나 지원할 수 있어요. 팀 활동은 주로 한국어로 진행해서, 한국어 일상 대화가 가능해야 해요(TOPIK 3급 정도면 충분해요). 밋업 6회와 Showcase Night 모두 서울 성수에서 오프라인으로 열려서, 전부 참여할 수 있어야 해요.</div></details>
         <details><summary>비자 종류가 선발에 영향을 주나요?</summary><div class="a">아니요. 비자 정보는 <b>통계용</b>으로만 쓰고, 선발 결과에는 영향을 주지 않아요.</div></details>
         <details><summary>자기소개 영상은 어떻게 내나요?</summary><div class="a">1분 내외로 휴대폰으로 찍어도 괜찮아요. YouTube('일부 공개') 또는 Google Drive('링크가 있는 모든 사용자')에 올리고 링크를 붙여 넣어 주세요. 영상은 <b>선발 심사에만</b> 쓰고 공개하지 않아요.</div></details>
         <details><summary>결과는 언제 알 수 있나요?</summary><div class="a"><b>10월 20일(화)</b>에 신청서에 적은 이메일로 알려 드려요.</div></details>
@@ -516,7 +517,7 @@
             <label for="f_video">자기소개 영상 링크<span class="req">*</span><span class="en-s">Self-introduction video</span></label>
             <div class="video-guide">
               1분 내외의 짧은 영상을 한국어로 찍어 주세요. 휴대폰으로 찍어도 괜찮아요.
-              <ol><li>어떤 일을 하고 싶나요? (한국에서 일하고 싶은 분야·직무)</li><li>왜 Passmakers에 참여하고 싶나요? (3개월 동안 팀 프로젝트로 얻고 싶은 것 또는 팀에서 내가 할 수 있는 역할)</li></ol>
+              <ol><li>어떤 일을 하고 싶나요? (한국에서 일하고 싶은 분야·직무)</li><li>왜 Passmakers에 참여하고 싶나요? (팀 프로젝트로 얻고 싶은 것 또는 팀에서 내가 할 수 있는 역할)</li></ol>
               YouTube('일부 공개') 또는 Google Drive('링크가 있는 모든 사용자')에 올리고 링크를 붙여 넣어 주세요. 영상은 선발 심사에만 쓰고 공개하지 않아요.
             </div>
             <input id="f_video" name="video" type="url" placeholder="YouTube 또는 Google Drive 링크">
