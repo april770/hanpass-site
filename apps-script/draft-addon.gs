@@ -148,7 +148,7 @@ function findDraftRow_(sh, cols, id) {
   return cell ? cell.getRow() : 0;
 }
 function nowText_() {
-  return Utilities.formatDate(new Date(), SpreadsheetApp.getActiveSpreadsheet().getSpreadsheetTimeZone(), 'yyyy-MM-dd HH:mm:ss');
+  return Utilities.formatDate(new Date(), 'Asia/Seoul', 'yyyy-MM-dd HH:mm:ss');   // 한국 시간
 }
 
 /** 편집기에서 한 번 실행해 임시저장 저장·불러오기를 점검 (점검 행은 바로 지움) */

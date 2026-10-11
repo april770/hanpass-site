@@ -820,6 +820,7 @@
     const hasLocal = !!(local && local.id === draftId && local.data);
     if (hasLocal){ fillForm(local.data); showLoaded('이 기기에 임시저장한 신청서를 불러왔어요. 이어서 작성해 주세요.'); }
     if (hasLocal && !local.synced) return;   // 마지막 서버 저장이 실패했다면 이 기기 내용이 최신
+    if (!hasLocal) showLoaded('임시저장한 신청서를 불러오는 중이에요. 잠시만 기다려 주세요…');
     try{
       const r = await (await fetch(CONFIG.SCRIPT_URL + '?draft=' + encodeURIComponent(draftId))).json();
       if (r.ok && r.data){
