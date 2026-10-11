@@ -701,7 +701,7 @@
     const keys = ['website','name','email','phone','nationality','region','visa','status','topik','korean','field1','field2','attend','motivation','video','hanwork','source','consent','media','news'];
     const data = Object.fromEntries(keys.map(k => [k, valueOf(k)]));
     data.inflow = INFLOW || draftInflow || '직접 방문';
-    if (draftId) data.draftId = draftId;   // 임시저장 탭의 해당 행을 '제출 완료'로 표시
+    if (draftId) data.draftId = draftId;   // 시트의 해당 '임시저장' 행을 '제출 완료'로 바꿈
     btn.disabled = true; btn.textContent = '보내는 중…'; statusEl.textContent = '신청서를 보내고 있어요. 잠시만 기다려 주세요.';
     try{
       // keepalive: 접수 화면으로 바뀌거나 창을 닫아도 전송은 끝까지 진행됨
@@ -720,7 +720,7 @@
   });
 
   /* ===== 임시저장 · 이어쓰기 링크 =====
-     저장: 시트 '02-1_참가 신청 임시저장' 탭에 임시저장 ID 기준으로 덮어씀 + 이 기기 localStorage
+     저장: 시트 '02_참가 신청 리스트' 탭에 '신청 상태 = 임시저장' 행으로 기록(같은 ID는 같은 행) + 이 기기 localStorage
      불러오기: ?draft=<ID> 링크 → Apps Script doGet 에서 받아 폼을 채움 */
   const DRAFT_KEYS = ['name','email','phone','nationality','region','visa','status','topik','korean','field1','field2','attend','motivation','video','hanwork','source','consent','media','news'];
   const DRAFT_ID_RE = /^[A-Za-z0-9_-]{16,64}$/;
@@ -825,7 +825,9 @@
       const r = await (await fetch(CONFIG.SCRIPT_URL + '?draft=' + encodeURIComponent(draftId))).json();
       if (r.ok && r.data){
         if (!touched || !hasLocal) fillForm(r.data);
-        showLoaded(r.state === '제출 완료'
+        const submitted = r.state === '제출 완료';
+        if (submitted){ draftId = ''; writeDraftStore(null); }   // 다음 임시저장은 새 행으로
+        showLoaded(submitted
           ? '이미 제출한 신청서예요. 다시 보내면 새 신청으로 한 번 더 접수돼요.'
           : '임시저장한 신청서를 불러왔어요' + (r.updatedAt ? ' (마지막 저장 ' + r.updatedAt + ')' : '') + '. 이어서 작성한 뒤 신청서를 보내 주세요.');
       } else if (!hasLocal){
