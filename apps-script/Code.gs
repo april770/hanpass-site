@@ -54,7 +54,8 @@ const NEW_COLUMNS = [
   ['임시저장 ID', '유입 링크'],
 ];
 const REQUIRED = ['name','email','phone','nationality','region','status','topik','field1','field2','attend','motivation','video','hanwork','source','consent','media'];
-const FORM_KEYS = MAP.map(m => m[0]).filter(k => ['timestamp', 'state', 'draftId'].indexOf(k) < 0);
+const DRAFT_REQUIRED = ['name', 'nationality', 'email', 'phone'];      // 임시저장에 필요한 항목
+const FORM_KEYS =MAP.map(m => m[0]).filter(k => ['timestamp', 'state', 'draftId'].indexOf(k) < 0);
 const DRAFT_ID_RE = /^[A-Za-z0-9_-]{16,64}$/;
 
 /** 최초 1회 실행: 권한 승인 + 새 열 준비 + 기존 신청 행 '제출 완료' 표시 + 임시저장 행 회색 표시 */
@@ -92,7 +93,9 @@ function doPost(e) {
     const draftId = DRAFT_ID_RE.test(String(d.draftId || '')) ? String(d.draftId) : '';
     if (isDraft) {
       if (!draftId) return json_({ ok: false, error: 'invalid draftId' });
-      if (!FORM_KEYS.some(k => k !== 'inflow' && String(d[k] || '').trim())) return json_({ ok: false, error: 'empty' });
+      const missing = DRAFT_REQUIRED.filter(k => !String(d[k] || '').trim());
+      if (missing.length) return json_({ ok: false, error: 'missing: ' + missing.join(',') });
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) return json_({ ok: false, error: 'invalid email' });
     } else {
       const missing = REQUIRED.filter(k => !String(d[k] || '').trim());
       if (d.topik === '없음' && !String(d.korean || '').trim()) missing.push('korean');
@@ -225,8 +228,10 @@ function json_(o) { return ContentService.createTextOutput(JSON.stringify(o)).se
 function testDraft() {
   const id = 'selftest' + Utilities.getUuid().replace(/-/g, '').slice(0, 16);
   const post = o => JSON.parse(doPost({ postData: { contents: JSON.stringify(o) } }).getContent());
-  Logger.log('draft 1: ' + JSON.stringify(post({ type: 'draft', draftId: id, name: '[점검] 임시저장', phone: '01000000000' })));
-  Logger.log('draft 2: ' + JSON.stringify(post({ type: 'draft', draftId: id, name: '[점검] 임시저장', phone: '01000000000', region: '점검' })));
+  const base = { type: 'draft', draftId: id, name: '[점검] 임시저장', nationality: '점검', email: 'test@example.com', phone: '01000000000' };
+  Logger.log('draft without email (should fail): ' + JSON.stringify(post(Object.assign({}, base, { email: '' }))));
+  Logger.log('draft 1: ' + JSON.stringify(post(base)));
+  Logger.log('draft 2: ' + JSON.stringify(post(Object.assign({}, base, { region: '점검' }))));
   Logger.log('get: ' + doGet({ parameter: { draft: id } }).getContent());
   const full = { draftId: id, name: '[점검] 제출', email: 'test@example.com', phone: '01000000000', nationality: '점검', region: '점검',
     status: '구직 중', topik: '4급', field1: 'HR·조직문화', field2: '상품·서비스 기획', attend: '잘 모르겠어요', motivation: '점검',

@@ -439,6 +439,7 @@
       <div class="narrow" style="max-width:48rem;margin:0 auto">
         <div class="sec-head" style="margin-bottom:0"><span class="mono">05 · Apply</span><h2>참가 신청하기</h2><span class="en-h">Application form · about 5 minutes</span></div>
         <p class="apply-sub">마감 <b style="color:var(--acc)">10.19(월)</b> · 작성은 5분 정도 걸려요. 자기소개 영상 링크를 미리 준비해 주세요.</p>
+        <p class="apply-sub" style="margin-top:.35rem">한 번에 다 못 쓰겠다면 이름·국적·이메일·휴대전화 번호까지 적고 맨 아래 ‘임시저장하고 링크 복사하기’를 눌러 두세요. 복사한 링크로 나중에 이어서 쓸 수 있어요.</p>
 
         <form id="applyForm" novalidate>
           <div class="hp" aria-hidden="true"><label>웹사이트<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
@@ -571,7 +572,7 @@
             <button class="btn" type="submit" id="submitBtn">신청서 보내기 · Submit</button>
             <button class="btn btn-line" type="button" id="draftBtn">임시저장하고 링크 복사하기<span class="en-btn"> · Save &amp; copy link</span></button>
           </div>
-          <span class="hint" style="margin-top:.6rem">다 못 썼다면 임시저장해 두고, 복사한 링크로 나중에 이어서 쓸 수 있어요. 링크에 작성 내용이 연결되니 다른 사람에게 보내지 마세요.</span>
+          <span class="hint" style="margin-top:.6rem">다 못 썼다면 이름·국적·이메일·휴대전화 번호까지 적고 임시저장해 두세요. 복사한 링크로 나중에 이어서 쓸 수 있어요. 링크에 작성 내용이 연결되니 다른 사람에게 보내지 마세요.</span>
           <p class="draft-status" id="draftStatus" role="status" aria-live="polite"></p>
           <input class="draft-link" id="draftLink" type="text" readonly aria-label="이어쓰기 링크" hidden>
           <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
@@ -664,9 +665,9 @@
   }
   const VIDEO_RE = /^https?:\/\/(www\.)?(youtube\.com|youtu\.be|m\.youtube\.com|drive\.google\.com)\//i;
 
-  function validate(){
+  function validate(fields){   // fields: 검사할 .field 목록 (없으면 필수 항목 전체)
     let firstBad = null;
-    form.querySelectorAll('.field[data-req]').forEach(f => {
+    (fields || form.querySelectorAll('.field[data-req]')).forEach(f => {
       if (f.classList.contains('hidden')) { f.classList.remove('invalid'); return; }
       let ok;
       if (f.dataset.group){
@@ -724,6 +725,7 @@
      불러오기: ?draft=<ID> 링크 → Apps Script doGet 에서 받아 폼을 채움 */
   const DRAFT_KEYS = ['name','email','phone','nationality','region','visa','status','topik','korean','field1','field2','attend','motivation','video','hanwork','source','consent','media','news'];
   const DRAFT_ID_RE = /^[A-Za-z0-9_-]{16,64}$/;
+  const DRAFT_REQUIRED = ['f_name', 'f_nat', 'f_email', 'f_phone'];   // 임시저장에 필요한 항목 (서버도 같은 검사)
   const DRAFT_STORE = 'passmakers_apply_draft';
   const draftBtn = document.getElementById('draftBtn');
   const DRAFT_LABEL = draftBtn.innerHTML;
@@ -785,7 +787,9 @@
   draftBtn.addEventListener('click', async () => {
     const data = collectDraft();
     draftLink.hidden = true;
-    if (!DRAFT_KEYS.some(k => data[k])){ setDraftStatus('한 항목 이상 적은 뒤에 저장해 주세요.', true); return; }
+    if (!validate(DRAFT_REQUIRED.map(id => document.getElementById(id).closest('.field')))){
+      setDraftStatus('임시저장하려면 이름·국적·이메일·휴대전화 번호를 먼저 적어 주세요.', true); return;
+    }
     if (!draftId) draftId = newDraftId();
     const url = draftUrl(draftId);
     const copied = copyText(url);   // 클릭 직후에 복사해야 Safari에서도 막히지 않음
