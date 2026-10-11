@@ -177,6 +177,17 @@
   .file-name.has{color:var(--ink);font-weight:700}
   .invalid .file-box{border-color:var(--error)}
   form .btn{margin-top:.5rem}
+  .form-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:.5rem}
+  .form-actions .btn{margin-top:0}
+  .btn.btn-line{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+  .btn.btn-line::after{content:none}
+  .btn.btn-line:hover{background:var(--bg)}
+  @media (max-width:600px){.form-actions .btn{width:100%;justify-content:center}.btn-line .en-btn{display:none}}
+  .draft-status{margin:.75rem 0 0;font-size:.9375rem;font-weight:700}
+  .draft-status.error{color:var(--error)}
+  .draft-link{margin-top:.5rem;font-size:.875rem}
+  .draft-loaded{background:#FFF1EF;border-left:4px solid var(--acc);padding:.75rem 1rem;margin:0 0 1.25rem;font-size:.9375rem;font-weight:600}
+  .draft-loaded.error{border-left-color:var(--error)}
   .form-status{margin-top:1rem;font-weight:700}
   .form-status.error{color:var(--error)}
   .done{display:none;border-top:6px solid var(--acc)}
@@ -431,6 +442,7 @@
 
         <form id="applyForm" novalidate>
           <div class="hp" aria-hidden="true"><label>웹사이트<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+          <p class="draft-loaded" id="draftLoaded" role="status" hidden></p>
 
           <p class="mono" style="color:var(--ink-sub);margin:0 0 1rem">1 · Basic info</p>
           <div class="row2">
@@ -555,7 +567,13 @@
           </div>
           <p class="policy" style="margin:.75rem 0 1rem">※ 신청서는 Google 스프레드시트에 저장되어 해외에 있는 Google 서버에 보관돼요.<br>※ 자기소개 영상은 선발 심사에만 쓰고 공개하지 않아요.<br>※ 문의·삭제 요청: april@sooandcarrots.com</p>
 
-          <button class="btn" type="submit" id="submitBtn">신청서 보내기 · Submit</button>
+          <div class="form-actions">
+            <button class="btn" type="submit" id="submitBtn">신청서 보내기 · Submit</button>
+            <button class="btn btn-line" type="button" id="draftBtn">임시저장하고 링크 복사하기<span class="en-btn"> · Save &amp; copy link</span></button>
+          </div>
+          <span class="hint" style="margin-top:.6rem">다 못 썼다면 임시저장해 두고, 복사한 링크로 나중에 이어서 쓸 수 있어요. 링크에 작성 내용이 연결되니 다른 사람에게 보내지 마세요.</span>
+          <p class="draft-status" id="draftStatus" role="status" aria-live="polite"></p>
+          <input class="draft-link" id="draftLink" type="text" readonly aria-label="이어쓰기 링크" hidden>
           <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
         </form>
 
@@ -682,7 +700,8 @@
     if (!validate()){ statusEl.textContent = '표시된 항목을 확인해 주세요.'; statusEl.classList.add('error'); return; }
     const keys = ['website','name','email','phone','nationality','region','visa','status','topik','korean','field1','field2','attend','motivation','video','hanwork','source','consent','media','news'];
     const data = Object.fromEntries(keys.map(k => [k, valueOf(k)]));
-    data.inflow = INFLOW || '직접 방문';
+    data.inflow = INFLOW || draftInflow || '직접 방문';
+    if (draftId) data.draftId = draftId;   // 시트의 해당 '임시저장' 행을 '제출 완료'로 바꿈
     btn.disabled = true; btn.textContent = '보내는 중…'; statusEl.textContent = '신청서를 보내고 있어요. 잠시만 기다려 주세요.';
     try{
       // keepalive: 접수 화면으로 바뀌거나 창을 닫아도 전송은 끝까지 진행됨
@@ -691,6 +710,7 @@
       await Promise.race([send, new Promise(r => setTimeout(r, 3000))]);
       form.style.display = 'none';
       statusEl.textContent = '';
+      writeDraftStore(null);
       const done = document.getElementById('done'); done.style.display = 'block'; done.focus();
       track('generate_lead', {inflow: data.inflow});
     }catch(err){
@@ -698,6 +718,125 @@
       statusEl.classList.add('error'); btn.disabled = false; btn.textContent = BTN_LABEL;
     }
   });
+
+  /* ===== 임시저장 · 이어쓰기 링크 =====
+     저장: 시트 '02_참가 신청 리스트' 탭에 '신청 상태 = 임시저장' 행으로 기록(같은 ID는 같은 행) + 이 기기 localStorage
+     불러오기: ?draft=<ID> 링크 → Apps Script doGet 에서 받아 폼을 채움 */
+  const DRAFT_KEYS = ['name','email','phone','nationality','region','visa','status','topik','korean','field1','field2','attend','motivation','video','hanwork','source','consent','media','news'];
+  const DRAFT_ID_RE = /^[A-Za-z0-9_-]{16,64}$/;
+  const DRAFT_STORE = 'passmakers_apply_draft';
+  const draftBtn = document.getElementById('draftBtn');
+  const DRAFT_LABEL = draftBtn.innerHTML;
+  const draftStatus = document.getElementById('draftStatus');
+  const draftLink = document.getElementById('draftLink');
+  const draftLoaded = document.getElementById('draftLoaded');
+  let draftId = DRAFT_ID_RE.test(qs.get('draft') || '') ? qs.get('draft') : '';
+  let draftInflow = '';
+  let touched = false;
+  form.addEventListener('input', () => { touched = true; });
+  form.addEventListener('change', () => { touched = true; });
+
+  function newDraftId(){
+    const b = crypto.getRandomValues(new Uint8Array(16));
+    return btoa(String.fromCharCode.apply(null, b)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+  function draftUrl(id){ return location.origin + location.pathname + '?draft=' + id + '#apply'; }
+  function readDraftStore(){ try{ return JSON.parse(localStorage.getItem(DRAFT_STORE) || 'null'); }catch(e){ return null; } }
+  function writeDraftStore(v){ try{ if (v) localStorage.setItem(DRAFT_STORE, JSON.stringify(v)); else localStorage.removeItem(DRAFT_STORE); }catch(e){} }
+  function collectDraft(){
+    const d = Object.fromEntries(DRAFT_KEYS.map(k => [k, valueOf(k)]));
+    d.inflow = INFLOW || draftInflow || '직접 방문';
+    return d;
+  }
+  function fillForm(d){
+    DRAFT_KEYS.forEach(k => {
+      const v = String(d[k] || '');
+      const els = form.querySelectorAll('[name="' + k + '"]');
+      if (!els.length) return;
+      const other = form.querySelector('.other-text[data-for="' + k + '"]');
+      const isOther = !!other && v.indexOf('기타: ') === 0;
+      if (other) other.value = isOther ? v.slice(4) : '';
+      if (els[0].tagName === 'SELECT'){
+        const sel = els[0];
+        sel.value = isOther ? '__other' : (Array.from(sel.options).some(o => o.value === v) ? v : '');
+      } else if (els[0].type === 'radio' || els[0].type === 'checkbox'){
+        els.forEach(el => { el.checked = isOther ? el.value === '__other' : el.value === v; });
+      } else {
+        els[0].value = v;
+      }
+    });
+    koreanField.classList.toggle('hidden', valueOf('topik') !== '없음');
+    visaOther.hidden = visaSel.value !== '__other';
+    if (d.inflow) draftInflow = d.inflow;
+  }
+  function showLoaded(msg, isError){
+    draftLoaded.textContent = msg; draftLoaded.hidden = false;
+    draftLoaded.classList.toggle('error', !!isError);
+  }
+  function setDraftStatus(msg, isError){
+    draftStatus.textContent = msg;
+    draftStatus.classList.toggle('error', !!isError);
+  }
+  function copyText(t){
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(t).then(() => true, () => false);
+    return Promise.resolve(false);
+  }
+
+  draftBtn.addEventListener('click', async () => {
+    const data = collectDraft();
+    draftLink.hidden = true;
+    if (!DRAFT_KEYS.some(k => data[k])){ setDraftStatus('한 항목 이상 적은 뒤에 저장해 주세요.', true); return; }
+    if (!draftId) draftId = newDraftId();
+    const url = draftUrl(draftId);
+    const copied = copyText(url);   // 클릭 직후에 복사해야 Safari에서도 막히지 않음
+    writeDraftStore({ id: draftId, data, savedAt: Date.now(), synced: false });
+    history.replaceState(null, '', location.pathname + '?draft=' + draftId + location.hash);
+    draftBtn.disabled = true; draftBtn.textContent = '저장하는 중…'; setDraftStatus('');
+    let saved = false;
+    try{
+      const body = Object.assign({ type: 'draft', draftId, website: form.elements.website.value }, data);
+      const res = await fetch(CONFIG.SCRIPT_URL, { method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(body) });
+      saved = (await res.json()).ok === true;
+    }catch(e){}
+    draftBtn.disabled = false; draftBtn.innerHTML = DRAFT_LABEL;
+    track('save_draft', {saved});
+    if (!saved){
+      setDraftStatus('임시저장하지 못했어요. 작성한 내용은 이 기기에만 남아 있으니 잠시 뒤 다시 눌러 주세요.', true);
+      return;
+    }
+    writeDraftStore({ id: draftId, data, savedAt: Date.now(), synced: true });
+    draftLink.value = url; draftLink.hidden = false;
+    setDraftStatus(await copied
+      ? '임시저장했어요. 이어서 쓸 수 있는 링크를 복사했어요. 메모장이나 내 메신저에 붙여 넣어 두세요.'
+      : '임시저장했어요. 아래 링크를 복사해 두면 나중에 이어서 쓸 수 있어요.');
+  });
+  draftLink.addEventListener('focus', () => draftLink.select());
+
+  /* 이어쓰기: ?draft= 링크로 들어왔거나, 이 기기에 임시저장한 내용이 있으면 불러옴 */
+  (async function(){
+    const local = readDraftStore();
+    if (!draftId && local && DRAFT_ID_RE.test(local.id || '')) draftId = local.id;
+    if (!draftId) return;
+    const hasLocal = !!(local && local.id === draftId && local.data);
+    if (hasLocal){ fillForm(local.data); showLoaded('이 기기에 임시저장한 신청서를 불러왔어요. 이어서 작성해 주세요.'); }
+    if (hasLocal && !local.synced) return;   // 마지막 서버 저장이 실패했다면 이 기기 내용이 최신
+    if (!hasLocal) showLoaded('임시저장한 신청서를 불러오는 중이에요. 잠시만 기다려 주세요…');
+    try{
+      const r = await (await fetch(CONFIG.SCRIPT_URL + '?draft=' + encodeURIComponent(draftId))).json();
+      if (r.ok && r.data){
+        if (!touched || !hasLocal) fillForm(r.data);
+        const submitted = r.state === '제출 완료';
+        if (submitted){ draftId = ''; writeDraftStore(null); }   // 다음 임시저장은 새 행으로
+        showLoaded(submitted
+          ? '이미 제출한 신청서예요. 다시 보내면 새 신청으로 한 번 더 접수돼요.'
+          : '임시저장한 신청서를 불러왔어요' + (r.updatedAt ? ' (마지막 저장 ' + r.updatedAt + ')' : '') + '. 이어서 작성한 뒤 신청서를 보내 주세요.');
+      } else if (!hasLocal){
+        showLoaded('임시저장한 신청서를 찾지 못했어요. 링크를 다시 확인해 주세요.', true);
+      }
+    }catch(e){
+      if (!hasLocal) showLoaded('임시저장한 신청서를 불러오지 못했어요. 잠시 뒤 새로고침해 주세요.', true);
+    }
+  })();
 
   /* 모바일 하단 고정 버튼: 신청 영역 밖에서 표시 */
   (function(){
